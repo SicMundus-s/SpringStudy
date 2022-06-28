@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>hello</title>
@@ -9,5 +8,7 @@
 Hello!
 
 <a href="goodbye">Say Goodbye</a> or<a href="/exit"> Exit </a> or <a href="/hello?name=John&surname=Kramer">Request with parameters</a>
+
+<p th:text="${message}"/> <!--ТаймЛиф обратится к модели, найдёт ключ message и вставит в тег p(Текстовый тег) -->
 </body>
 </html>
