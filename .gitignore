@@ -95,6 +95,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 ### Maven template
+database.properties
 target/
 pom.xml.tag
 pom.xml.releaseBackup
