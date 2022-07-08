@@ -19,17 +19,20 @@ public class Person {
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid") // Использует регулярные выражения для проверки ввода email(sdfsd@afaf.ru)
     private String email;
-
+    //Структура - Страна, Город, Индекс( 6 цифр)
+    private String address;
     public Person() {
 
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
+
 
     public int getId() {
         return id;
@@ -61,5 +64,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
