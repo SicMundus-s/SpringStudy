@@ -102,7 +102,7 @@ public class PersonDAO {
     public List<Person> create1000people() {
         List<Person> people = new ArrayList<>();
         for(int i = 0; i < 1000; i++) {
-            people.add(new Person(i, "Name" + i, 30, "Email" + i + "mail.ru", "address" + i));
+            people.add(new Person(i, "Name" + i, 30, "Email" + i + "mail.ru", "Address" + i));
         }
         return people;
     }
