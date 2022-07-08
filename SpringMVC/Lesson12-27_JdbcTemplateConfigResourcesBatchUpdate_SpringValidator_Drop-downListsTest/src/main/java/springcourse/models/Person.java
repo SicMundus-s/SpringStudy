@@ -1,10 +1,7 @@
 package springcourse.models;
 
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class Person {
     private int id;
@@ -20,6 +17,7 @@ public class Person {
     @Email(message = "Email should be valid") // Использует регулярные выражения для проверки ввода email(sdfsd@afaf.ru)
     private String email;
     //Структура - Страна, Город, Индекс( 6 цифр)
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "your address should be in this format: County, City, Postal Code (6 digits") // Паттерн - представляет шаблон строки адресс(какой она должна быть)
     private String address;
     public Person() {
 
