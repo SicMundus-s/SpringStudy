@@ -1,9 +1,6 @@
 package springcourse.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
@@ -11,6 +8,7 @@ public class Person {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   // Указывает стратегию с помощью которой генерится id
     private int id;
 
     @Column(name = "name")
@@ -23,8 +21,7 @@ public class Person {
 
     }
 
-    public Person(int id, String name, int age) {
-        this.id = id;
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }

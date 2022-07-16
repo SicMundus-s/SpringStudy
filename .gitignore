@@ -96,6 +96,7 @@ $RECYCLE.BIN/
 *.lnk
 ### Maven template
 database.properties
+hibernate.properties
 target/
 pom.xml.tag
 pom.xml.releaseBackup
