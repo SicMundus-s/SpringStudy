@@ -22,17 +22,23 @@ public class App
         try {
             session.beginTransaction();
 
-           Person person1 = new Person("Test1", 30);
-            Person person2 = new Person("Test2", 30);
-            Person person3 = new Person("Test3", 30);
+           Person person1 = new Person("Soma name", 30);
+           session.save(person1);
 
-            session.save(person1);
-            session.save(person2);
-            session.save(person3);
+            //session.save(person1); // Сохранение объекта в бд
+
+            Person person = session.get(Person.class, 1);
+            //person.setName("New name"); // Изменение значения поля
+
+            //session.delete(person); // Удаление объекта из бд
+
+            System.out.println(person1.getId());
 
             session.getTransaction().commit();
         }finally {
             sessionFactory.close();
         }
+
+
     }
 }
