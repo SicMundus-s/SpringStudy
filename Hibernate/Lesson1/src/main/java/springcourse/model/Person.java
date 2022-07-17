@@ -9,10 +9,11 @@ public class Person {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)   // Указывает стратегию с помощью которой генерится id
+
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "person_name")
+    private String person_name;
 
     @Column(name = "age")
     private int age;
@@ -21,8 +22,8 @@ public class Person {
 
     }
 
-    public Person(String name, int age) {
-        this.name = name;
+    public Person(String person_name, int age) {
+        this.person_name = person_name;
         this.age = age;
     }
 
@@ -34,12 +35,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPerson_name() {
+        return person_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPerson_name(String person_name) {
+        this.person_name = person_name;
     }
 
     public int getAge() {
@@ -48,5 +49,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "person_name='" + person_name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

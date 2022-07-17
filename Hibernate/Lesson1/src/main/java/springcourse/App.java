@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import springcourse.model.Person;
 
+import java.util.List;
+
 /**
  * Hello world!
  *
@@ -23,7 +25,7 @@ public class App
             session.beginTransaction();
 
            Person person1 = new Person("Soma name", 30);
-           session.save(person1);
+           //session.save(person1);
 
             //session.save(person1); // Сохранение объекта в бд
 
@@ -32,7 +34,19 @@ public class App
 
             //session.delete(person); // Удаление объекта из бд
 
-            System.out.println(person1.getId());
+
+            // HQL
+            /**
+             * HQL - диалект SQL взаимодействующий с hibernate, он же в свою очередь переводит запрос HQL -> SQL
+             * HQL обрщрается не к БД а к сущностям(Java классам)
+             */
+
+            // Оператор Like похож на регулярные выражения. Описывает паттерны в тексте
+            List<Person> people = session.createQuery("FROM Person WHERE name LIKE 'S%' ").getResultList();
+            for(Person temp : people) {
+               System.out.println(temp);
+            }
+            session.createQuery("UPDATE Person SET name = 'TEST' WHERE age < 3  5").executeUpdate();
 
             session.getTransaction().commit();
         }finally {
