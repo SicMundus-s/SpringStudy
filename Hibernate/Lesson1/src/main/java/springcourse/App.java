@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import springcourse.model.Item;
 import springcourse.model.Person;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,19 +30,19 @@ public class App
         try {
             session.beginTransaction();
 
-//              Person person = session.get(Person.class, 3);
-//              Item item = new Item("ItemFromPerson3", person);
-//              session.save(item); // Сохраняем в бд новый item у человека
-//
-//            /* Так же из-за кэширования со стороны hibernate лучше указать с двух сторон добавление item.
-//            * Эта строчка не порождает никаких SQL запросов, просто гарантирует, что объекты в кэше соответствуют БД  */
-//              person.getItems().add(item);
+            Person person = new Person("Cascanding", 25);
+            person.addItem(new Item("Test casnding item1"));
+            person.addItem(new Item("Test casnding item2"));
+            person.addItem(new Item("Test casnding item3"));
 
-            Person person = new Person("Test person", 50);
-            Item item = new Item("ItemTestPerson", person);
-            person.setItems(new ArrayList<Item>(Collections.singletonList(item)));
+            /*  Разница между Save and persist: 1. Save возращает значение первичного ключа для добавленной сущности
+            * persist - не возвращает. 2. Значение первичного ключа гарантированно будет определенно после вызова Save.
+            * persist - не гарантирует */
+            //session.persist(person);
+            //Можно заметить добавление join в запросах hibernate к БД после добавления каскадирования
             session.save(person);
-            session.save(item);
+
+
 
             session.getTransaction().commit();
         }finally {
