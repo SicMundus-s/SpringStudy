@@ -42,7 +42,7 @@ public class App
             person.setItems(new ArrayList<Item>(Collections.singletonList(item)));
             session.save(person);
             session.save(item);
-            
+
             session.getTransaction().commit();
         }finally {
             sessionFactory.close();
