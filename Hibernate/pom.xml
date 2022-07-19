@@ -12,6 +12,7 @@
         <module>TastOneToMany</module>
         <module>OneToOne</module>
         <module>TaskOneToOne</module>
+        <module>ManyToMany</module>
     </modules>
 
     <name>Hibernate</name>
