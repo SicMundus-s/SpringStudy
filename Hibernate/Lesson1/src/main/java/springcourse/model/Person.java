@@ -21,7 +21,7 @@ public class Person {
     @Column(name = "age")
     private int age;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER) // Подгружает все зависимые сущности
     /*Cascade - В данном случае при вызове метода Save на объекте, вместе с ним сохраняются и объекты по внешнему ключу
     * Нам не придётся вручную сохранять связанные items в БД*/
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.REFRESH})// Каскадирование в hibernate. Persist - сохранить

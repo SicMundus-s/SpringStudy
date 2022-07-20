@@ -42,7 +42,7 @@ public class App
             session.save(movieManyToMany);
             session.save(actor);
             session.save(actor1);
-            
+
 
             session.getTransaction().commit();
         }

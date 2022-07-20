@@ -1,5 +1,6 @@
 package springcourse;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -30,21 +31,28 @@ public class App
         try {
             session.beginTransaction();
 
-            Person person = new Person("Cascanding", 25);
-            person.addItem(new Item("Test casnding item1"));
-            person.addItem(new Item("Test casnding item2"));
-            person.addItem(new Item("Test casnding item3"));
-
             /*  Разница между Save and persist: 1. Save возращает значение первичного ключа для добавленной сущности
             * persist - не возвращает. 2. Значение первичного ключа гарантированно будет определенно после вызова Save.
             * persist - не гарантирует */
             //session.persist(person);
             //Можно заметить добавление join в запросах hibernate к БД после добавления каскадирования
-            session.save(person);
 
+            Person person = session.get(Person.class, 5);
+            System.out.println(person);
 
+            Hibernate.initialize(person.getItems()); // Подгружаем явные ленивые сущности
 
             session.getTransaction().commit();
+            System.out.println("Конец первой сессии");
+
+            // Открываем сессию и транзакцию снова
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            person = (Person) session.merge(person); //
+
+            session.getTransaction().commit();
+
         }finally {
             sessionFactory.close();
         }
