@@ -13,6 +13,7 @@
         <module>OneToOne</module>
         <module>TaskOneToOne</module>
         <module>ManyToMany</module>
+        <module>SpringAndHibernate</module>
     </modules>
 
     <name>Hibernate</name>
