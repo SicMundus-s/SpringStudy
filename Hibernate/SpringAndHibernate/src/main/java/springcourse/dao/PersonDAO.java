@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// DAO Инкапсуляция источника данных. Проще говоря DAO урпавляет данными переданными из БД и тем самым закрывая потребность напрямую обращатся к БД
+// DAO Инкапсуляция источника данных. Проще говоря DAO управляет данными переданными из БД и тем самым закрывая потребность напрямую обращатся к БД
 @Component
 public class PersonDAO {
 
@@ -28,28 +28,43 @@ public class PersonDAO {
     public List<Person> index() {
         Session session = sessionFactory.getCurrentSession();
 
-        List<Person> people = session.createQuery("SELECT p FROM  Person p", Person.class).getResultList();
-        return people;
+        return session.createQuery("SELECT p FROM  Person p", Person.class).getResultList();
     }
 
+    @Transactional(readOnly = true)
     public Person show(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Person.class, id);
     }
 
+    /*@Transactional
     public Optional<Person> show(String email) {
-        return null;
-    }
+        Session session = sessionFactory.getCurrentSession();
+        Person person = session.createQuery()
+        return Optional.ofNullable(person);
+    }*/
 
+    @Transactional
     public void save(Person person) {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.save(person);
     }
 
+    @Transactional
     public void update(int id, Person updatedPerson) {
+        Session session = sessionFactory.getCurrentSession();
+        Person personToBeUpdate = session.get(Person.class, id);
 
+        personToBeUpdate.setName(updatedPerson.getName());
+        personToBeUpdate.setAge(updatedPerson.getAge());
+        personToBeUpdate.setEmail(updatedPerson.getEmail());
+        personToBeUpdate.setAddress(updatedPerson.getAddress());
     }
 
+    @Transactional
     public void delete(int id) {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(session.get(Person.class, id));
     }
 
     ///////////////

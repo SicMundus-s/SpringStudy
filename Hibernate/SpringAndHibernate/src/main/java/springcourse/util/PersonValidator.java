@@ -1,3 +1,4 @@
+/*
 package springcourse.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,3 +32,4 @@ public class PersonValidator implements Validator {
         }
     }
 }
+*/
