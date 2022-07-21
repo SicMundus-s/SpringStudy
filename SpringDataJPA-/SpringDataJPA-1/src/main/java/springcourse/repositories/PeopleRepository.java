@@ -9,4 +9,5 @@ import springcourse.models.Person;
 @Repository
 public interface PeopleRepository extends JpaRepository<Person, Integer> { // Первый параметр - Для какой сущности. Второй - тип первичного ключа
 
+    // Кастомные запросы
 }
