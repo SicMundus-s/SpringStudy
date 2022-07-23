@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import springcourse.models.Person;
 import springcourse.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,7 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
+        person.setCreatedAt(new Date()); // Объект Date хранит текущие время
         peopleRepository.save(person);
     }
 
@@ -46,7 +48,4 @@ public class PeopleService {
     }
 
 
-    public void test() {
-        System.out.println("Testing here with debug");
-    }
 }
