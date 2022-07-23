@@ -35,7 +35,7 @@ public class Person {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Item> itemList;
 
     @Column(name = "date_of_birth")
@@ -139,8 +139,32 @@ public class Person {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", itemList=" + itemList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (id != person.id) return false;
+        if (age != person.age) return false;
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (email != null ? !email.equals(person.email) : person.email != null) return false;
+        if (address != null ? !address.equals(person.address) : person.address != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
     }
 }
