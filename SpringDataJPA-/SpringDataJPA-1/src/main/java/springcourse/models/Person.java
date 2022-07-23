@@ -3,6 +3,7 @@ package springcourse.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -30,6 +31,9 @@ public class Person {
             message = "your address should be in this format: County, City, Postal Code (6 digits") // Паттерн - представляет шаблон строки адресс(какой она должна быть)
     @Column(name = "address")
     private String address;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> itemList;
     public Person() {
 
     }
@@ -81,5 +85,24 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", itemList=" + itemList +
+                '}';
     }
 }
