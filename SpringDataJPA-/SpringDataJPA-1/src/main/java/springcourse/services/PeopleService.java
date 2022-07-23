@@ -3,6 +3,7 @@ package springcourse.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springcourse.models.Mood;
 import springcourse.models.Person;
 import springcourse.repositories.PeopleRepository;
 
@@ -32,6 +33,7 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
+        person.setMood(Mood.CALM); // 4
         person.setCreatedAt(new Date()); // Объект Date хранит текущие время
         peopleRepository.save(person);
     }
