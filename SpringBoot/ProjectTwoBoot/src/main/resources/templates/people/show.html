@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+   <!-- <meta http-equiv="refresh" content="30"> Обновление каждый 30 сек-->
+    <title>Профиль пользователя</title>
+</head>
+<body style="background-color:powderblue;">
+
+<h1 style="text-align:center;">Просмотр профиля человека</h1>
+
+<p th:text="${'full name: ' + person.getName() + ' '  + person.getSurname() + ' ' + person.getmiddle_name() + ', '
+        + 'birthday: ' +  person.getBirthday()}">VALUE</p>
+
+<div th:if="${booksPerson.isEmpty()}">
+    <hr/>
+    <p>Человек пока не взял ни одной книги</p>
+    <hr/>
+</div>
+
+<div th:if="${!booksPerson.isEmpty()}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <div th:each="book : ${booksPerson}">
+     <span th:style="${book.isExpired()} ? 'color: red' : 'color: black'" >
+         <p th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}"> </p>
+        </span>
+    </div>
+    <hr/>
+</div>
+
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Update person"/>
+</form>
+<br/>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete person"/>
+</form>
+</body>
+</html>

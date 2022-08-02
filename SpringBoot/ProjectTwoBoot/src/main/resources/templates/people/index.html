@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Index(Отображение всех людей)</title>
+</head>
+<body>
+
+<!-- th:each извлекает список(лист) продуктов из уровня сервиса(дао)-->
+<div th:each="person : ${peopleList}">
+
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="${'full name: ' + person.getName() + ' '  + person.getSurname() + ' ' + person.getmiddle_name() + ', '
+        + 'birthday: ' +  person.getBirthday()}">user</a>
+    <hr/>
+</div>
+
+<form th:method="GET" th:action="@{/people/new}">
+    <input type="submit" value="Create person">
+</form>
+
+</body>
+</html>
