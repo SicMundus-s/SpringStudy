@@ -1,3 +1,4 @@
+/*
 package spring.course.springsecurity.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,3 +44,6 @@ public class AuthProviderImpl implements AuthenticationProvider {
         return true;
     }
 }
+*/
+
+// Нет необходимости использовать кастомную аутентификацию, это представлено для обучения
