@@ -35,9 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Правила авторизации
-        http.authorizeRequests()
-                .antMatchers("/auth/login", "/error").permitAll()
-                .anyRequest().authenticated() // Настрока авторизации -> Все не авторизированные пользователи не имеют доступа к страничка
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
+                .anyRequest().authenticated() // Настройка авторизации -> Все не авторизированные пользователи не имеют доступа к страничка
                 .and()// И... настройка кастомной странички входа
                 .formLogin().loginPage("/auth/login") // Передача нашей кастомной странички логина
                 .loginProcessingUrl("/process_login") // Адрес Post запроса

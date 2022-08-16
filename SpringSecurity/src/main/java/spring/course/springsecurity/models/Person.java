@@ -1,6 +1,9 @@
 package spring.course.springsecurity.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Person")
@@ -10,17 +13,28 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message = "Имя не должно быть пустым")
+    @Size(min = 2, max = 100, message = "Имя должно быть от 2 до 100 символов длиной")
     @Column(name = "username")
     private String username;
 
-    @Column(name = "year_of_brith")
-    private int year_of_brith;
+    @Min(value = 1900, message = "Год рождения должен быть больше, чем 1900")
+    @Column(name = "year_of_birth")
+    private int yearOfBirth;
 
     @Column(name = "password")
     private String password;
 
-    public Person() {
+    @Column(name = "role")
+    private String role;
 
+    // Конструктор по умолчанию нужен для Spring
+    public Person() {
+    }
+
+    public Person(String username, int yearOfBirth) {
+        this.username = username;
+        this.yearOfBirth = yearOfBirth;
     }
 
     public int getId() {
@@ -39,12 +53,12 @@ public class Person {
         this.username = username;
     }
 
-    public int getYear_of_brith() {
-        return year_of_brith;
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setYear_of_brith(int year_of_brith) {
-        this.year_of_brith = year_of_brith;
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
     public String getPassword() {
@@ -55,12 +69,20 @@ public class Person {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", year_of_brith=" + year_of_brith +
+                ", yearOfBirth=" + yearOfBirth +
                 ", password='" + password + '\'' +
                 '}';
     }
