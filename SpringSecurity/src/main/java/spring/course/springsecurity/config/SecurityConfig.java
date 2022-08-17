@@ -43,7 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/auth/login") // Передача нашей кастомной странички логина
                 .loginProcessingUrl("/process_login") // Адрес Post запроса
                 .defaultSuccessUrl("/hello", true) // На какую страничку перейти в случае успешного входа
-                .failureUrl("/auth/login?error"); // И в случае отрицательного результата входа
+                .failureUrl("/auth/login?error") // И в случае отрицательного результата входа
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login"); // При логауте стираются куки и сессия. И переходит на страничку логина
     }
 
 
