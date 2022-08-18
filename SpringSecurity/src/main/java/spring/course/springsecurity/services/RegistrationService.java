@@ -22,7 +22,7 @@ public class RegistrationService {
     @Transactional
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
-
+        person.setRole("ROLE_USER"); // Начинаю с ROLE_ так секьюрити будет понимать какую роль мы назначаем
         peopleRepositories.save(person);
     }
 }

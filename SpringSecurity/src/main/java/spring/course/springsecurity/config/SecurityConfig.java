@@ -38,8 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Правила авторизации
         http
                 .authorizeRequests()
+                .antMatchers("/admin").hasRole("ADMIN") // Страничка /admin получают доступ только те пользователи у которых есть роль админ
                 .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                .anyRequest().authenticated() // Настройка авторизации -> Все не авторизированные пользователи не имеют доступа к страничка
+                .anyRequest().hasAnyRole("USER", "ADMIN") // Настройка авторизации -> Все не авторизированные пользователи не имеют доступа к страничка
                 .and()// И... настройка кастомной странички входа
                 .formLogin().loginPage("/auth/login") // Передача нашей кастомной странички логина
                 .loginProcessingUrl("/process_login") // Адрес Post запроса
