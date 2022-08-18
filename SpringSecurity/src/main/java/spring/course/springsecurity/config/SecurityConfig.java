@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Правила авторизации
-        http.csrf().disable()
+        http
                 .authorizeRequests()
                 .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
                 .anyRequest().authenticated() // Настройка авторизации -> Все не авторизированные пользователи не имеют доступа к страничка
