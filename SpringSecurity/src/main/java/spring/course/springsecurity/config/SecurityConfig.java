@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import spring.course.springsecurity.services.PersonDetailsService;
 
@@ -25,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         try {
-            auth.userDetailsService(personDetailsService);
+            auth.userDetailsService(personDetailsService)
+                    .passwordEncoder(getPasswordEncoder()); // Проверка зашифрованных паролей при входе
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -45,12 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/hello", true) // На какую страничку перейти в случае успешного входа
                 .failureUrl("/auth/login?error") // И в случае отрицательного результата входа
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login"); // При логауте стираются куки и сессия. И переходит на страничку логина
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login"); // При логауте стираются куки и сессия. После переходит на страничку логина
     }
 
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder(); // Шифрование паролей при регистрации
     }
 }
